@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Dolce Vita Ligurienne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=boska@400,500,600,700&f[]=general-sans@300,400,500,600&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="light"]{
+  --color-bg:#f6f2e7;
+  --color-surface:#fbf8f0;
+  --color-surface-2:#f0ead8;
+  --color-surface-offset:#eae2cc;
+  --color-divider: #d9cfae;
+  --color-border: #cdbf95;
+  --color-text:#2b2a1f;
+  --color-text-muted:#6d6a53;
+  --color-text-faint:#a89f7d;
+  --color-text-inverse:#f6f2e7;
+  --color-green:#163024;
+  --color-green-2:#0f221a;
+  --color-green-light:#1e3d2f;
+  --color-gold:#b3893a;
+  --color-gold-light:#d8c08a;
+  --color-gold-deep:#8c6a26;
+  --radius-sm:0.375rem;
+  --radius-md:0.5rem;
+  --radius-lg:0.75rem;
+  --radius-xl:1.25rem;
+  --font-display:'Boska','Georgia',serif;
+  --font-body:'General Sans','Helvetica Neue',sans-serif;
+  --shadow-sm: 0 1px 2px oklch(0.2 0.02 100 / 0.08);
+  --shadow-md: 0 6px 20px oklch(0.2 0.02 100 / 0.10);
+  --shadow-lg: 0 16px 40px oklch(0.2 0.02 100 / 0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;}
+body{
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height:1.65;
+}
+img{display:block;max-width:100%;height:auto;}
+h1,h2,h3,h4{font-family:var(--font-display);line-height:1.15;color:var(--color-green);text-wrap:balance;}
+p{max-width:70ch;}
+a{color:var(--color-gold-deep);}
+.container{max-width:1040px;margin-inline:auto;padding-inline:clamp(1rem,4vw,2.5rem);}
+
+/* ===== COVER ===== */
+.cover{
+  position:relative;
+  min-height:100vh;
+  background: linear-gradient(180deg, var(--color-green) 0%, var(--color-green-2) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;color:var(--color-gold-light);
+  padding: clamp(2rem,6vw,5rem) 1.5rem;
+  overflow:hidden;
+}
+.cover-art{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; opacity:0.9; mix-blend-mode:normal;
+}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(180deg, rgba(15,34,26,0.15) 0%, rgba(15,34,26,0.55) 60%, rgba(15,34,26,0.85) 100%);}
+.cover-content{position:relative;z-index:2;}
+.cover-eyebrow{font-size:0.8rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--color-gold-light);margin-bottom:1.5rem;font-weight:500;}
+.cover-title{font-size:clamp(2.6rem,7vw,5.2rem);font-weight:600;margin-bottom:1rem;color:#fbf5e6;}
+.cover-sub{font-family:var(--font-display);font-style:italic;font-size:clamp(1.1rem,2.4vw,1.5rem);color:var(--color-gold-light);margin-bottom:2.2rem;}
+.cover-dates{font-size:0.95rem;letter-spacing:0.08em;text-transform:uppercase;color:#e6dcc0;margin-bottom:0.4rem;}
+.cover-line{width:60px;height:1px;background:var(--color-gold);margin:1.6rem auto;}
+.cover-dedication{font-family:var(--font-display);font-style:italic;font-size:1.05rem;color:#f0dfa8;opacity:0.92;}
+
+/* ===== OPENING PAGE ===== */
+.opening{padding-block:clamp(3rem,8vw,6rem);background:var(--color-surface);}
+.opening h2{font-size:clamp(1.8rem,3.5vw,2.4rem);margin-bottom:1rem;}
+.opening-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;margin-top:2.5rem;}
+.info-card{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:1.5rem;}
+.info-card h3{font-size:1rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-gold-deep);margin-bottom:0.6rem;font-family:var(--font-body);font-weight:600;}
+.info-card p, .info-card li{font-size:0.95rem;color:var(--color-text-muted);}
+.info-card ul{padding-left:1.1rem;margin-top:0.4rem;}
+.lede{font-size:1.1rem;color:var(--color-text-muted);max-width:68ch;}
+
+/* section divider */
+.section-divider{display:flex;align-items:center;justify-content:center;gap:1rem;margin:0 auto;padding:1rem 0;}
+.section-divider img{width:64px;height:auto;opacity:0.75;}
+
+/* ===== DAY CARD ===== */
+.day{padding-block:clamp(2.5rem,6vw,4rem);border-top:1px solid var(--color-divider);}
+.day:nth-child(odd){background:var(--color-surface);}
+.day-header{display:flex;flex-wrap:wrap;align-items:baseline;gap:0.8rem 1.4rem;margin-bottom:1.6rem;}
+.day-number{font-family:var(--font-display);font-size:0.95rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-gold-deep);font-weight:600;}
+.day-date{font-size:0.9rem;color:var(--color-text-faint);letter-spacing:0.04em;}
+.day-title{font-size:clamp(1.5rem,3vw,2.1rem);width:100%;}
+.day-body{display:grid;grid-template-columns:1.1fr 0.9fr;gap:2.2rem;align-items:start;}
+@media (max-width:820px){ .day-body{grid-template-columns:1fr;} }
+.day-photo{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:4/3;}
+.day-photo img{width:100%;height:100%;object-fit:cover;}
+.day-text p{color:var(--color-text);margin-bottom:0.9rem;}
+.day-meta{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;}
+.chip{font-size:0.78rem;padding:0.3rem 0.7rem;border-radius:999px;background:var(--color-surface-2);border:1px solid var(--color-border);color:var(--color-text-muted);}
+
+/* callout boxes */
+.callout{border-radius:var(--radius-md);padding:1.1rem 1.3rem;margin-top:1rem;font-size:0.94rem;}
+.callout-title{font-weight:600;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem;display:flex;align-items:center;gap:0.4rem;}
+.callout-reserve{background:color-mix(in oklch, var(--color-gold) 12%, var(--color-surface)); border:1px solid var(--color-gold-light);}
+.callout-reserve .callout-title{color:var(--color-gold-deep);}
+.callout-local{background:var(--color-surface-2);border:1px solid var(--color-border);}
+.callout-local .callout-title{color:var(--color-green-light);}
+.callout-signature{background: var(--color-green); color:var(--color-gold-light); border:1px solid var(--color-green-2);}
+.callout-signature .callout-title{color:var(--color-gold-light);}
+.callout-signature p{color:#f0e6cb;}
+
+.saveurs{margin-top:1.1rem;font-size:0.93rem;color:var(--color-text-muted);}
+.saveurs strong{color:var(--color-text);}
+
+/* Where to invest table */
+.invest-section{background:var(--color-green);color:var(--color-gold-light);padding-block:clamp(3rem,7vw,5rem);}
+.invest-section h2{color:#fbf5e6;}
+.invest-section .lede{color:#e6dcc0;}
+table.invest{width:100%;border-collapse:collapse;margin-top:2rem;font-size:0.94rem;}
+table.invest th{text-align:left;padding:0.9rem 1rem;border-bottom:2px solid var(--color-gold);color:var(--color-gold-light);font-family:var(--font-display);font-weight:500;text-transform:uppercase;letter-spacing:0.04em;font-size:0.82rem;}
+table.invest td{padding:0.9rem 1rem;border-bottom:1px solid color-mix(in oklch, var(--color-gold) 25%, transparent);color:#f0e6cb;vertical-align:top;}
+table.invest tr:hover td{background:rgba(255,255,255,0.03);}
+
+/* Practical footer */
+.footer{padding-block:clamp(2.5rem,6vw,4rem);background:var(--color-surface-2);border-top:1px solid var(--color-divider);}
+.footer h2{font-size:1.6rem;margin-bottom:1rem;}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.4rem;margin-top:1.6rem;}
+
+.top-nav{position:sticky;top:0;z-index:50;background:oklch(from var(--color-bg) l c h / 0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--color-divider);padding:0.8rem 0;font-size:0.85rem;}
+.top-nav .container{display:flex;justify-content:space-between;align-items:center;}
+.top-nav .brand{font-family:var(--font-display);font-weight:600;color:var(--color-green);letter-spacing:0.02em;}
+</style>
+</head>
+<body>
+
+<nav class="top-nav"><div class="container"><span class="brand">La Dolce Vita Ligurienne</span><span>19 – 30 avril 2027</span></div></nav>
+
+<section class="cover">
+  <img class="cover-art" src="https://img.magnific.com/photos-gratuite/lumieres-dorees-fond-sombre_23-2151831357.jpg?semt=ais_hybrid&w=740&q=80" alt="Illustration Art Déco de la côte ligure, vert profond et or" width="1024" height="1536" loading="eager">
+  <div class="cover-overlay"></div>
+  <div class="cover-content">
+    <h1 class="cover-title">La Dolce Vita<br>Ligurienne</h1>
+    <p class="cover-sub">Carnet de voyage — Cinque Terre de Charlène</p>
+    <p class="cover-dates">19 — 30 avril 2027 · La Spezia</p>
+    <div class="cover-line"></div>
+    <p class="cover-dedication">Pour tes 30 ans, Amore Mio !</p>
+  </div>
+</section>
+
+<section class="opening">
+  <div class="container">
+    <h2>Ouverture — l'esprit du voyage</h2>
+    <p class="lede">Douze jours pour apprivoiser la Ligurie autrement : un camp de base élégant à La Spezia, des matinées de sentiers suspendus au-dessus de la mer, des embarcations qui glissent d'un village à l'autre, et assez de lenteur pour goûter chaque focaccia, chaque verre de Sciacchetrà, chaque coucher de soleil. Ce carnet reprend fidèlement le programme que je t'ai sélectionné avec soin — jour par jour — en l'habillant des adresses, des réservations et des gestes qui transforment un beau voyage en un souvenir inoubliable.</p>
+    <div class="opening-grid">
+      <div class="info-card">
+        <h3>Vols</h3>
+        <p>Toulouse (TLS) → Pise (PSA) aller-retour, 19 et 30 avril 2027.</p>
+        <ul>
+          <li>Liaison directe TLS–PSA (~1h45 de vol) via Volotea </li>
+          <li>Aller : Lundi 19 Avril 2027 à 20h20</li>
+          <li>Retour : Vendredi 30 Avril 2027 à 23h05</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Transfert aéroport</h3>
+        <p>Train régional Pise Aéroport → La Spezia Centrale, environ 1h30, ~10 € par personne</div>
+      <div class="info-card">
+        <h3>Camp de base</h3>
+        <p>La Spezia, Centro Storico ou à proximité de la gare Centrale — 5 à 10 minutes des Cinque Terre en train.</p>
+      </div>
+      <div class="info-card">
+        <h3>Pass transport</h3>
+        <p>Cinque Terre Treno MS Card — 2 cartes de 3 jours à acheter pour les journées intensives, complétées de billets simples les autres jours.</p>
+        <p>Tarif moyenne saison : environ 68€ pour 3 jours par personne.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="section-divider"><img src="https://user-gen-media-assets.s3.us-east-1.amazonaws.com/gpt4o_images/0a421aa5-6fab-4586-bf93-c011b1d0b661.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Checksum-Mode=ENABLED&X-Amz-Credential=ASIA2F3EMEYEY4KXDAPL%2F20260902%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260902T202425Z&X-Amz-Expires=880&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEAQaCXVzLWVhc3QtMSJHMEUCIQCMiujLuNcpSKp%2FOyGdYhb3h3dm8wTfN962G9jZNGKIxwIgHLzYwS6pdprVlaDiUYnU4xYLW3WlHsUgkeigf8BK8EkqiQUIzf%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDPHg5OYlmDXHuS9PzSrdBJpDg%2FkWW1cqxg8a0ZWO%2BAyEnQoYsqa2hCB8vBhCgSPhOVzCvi61dGMdMKFQfAGBUE1aTJB1fwHpn06C%2B5ebypRSkXIBWHqsoRUD4zEOLFYAca%2B09zXJxgBm6sV8xVG1uUzFXVvk9NeRDz27vOsAzd27m5s8hcclwxIUzm8Cw1qSMN1taIpF4CWe%2B3tiNH5JNQ3zOT2h1T8cRQPajHOXDiUPHkMiFir0xqi41fF5%2Fa7hLeh%2FrMef6oeKfyzbl0FwSfJX3P5Xhs9YGvSBIWlXQrWDrfIjbuDqTIWAhXVrvUojUSXEeHLK4VNdJSqckjujAODSE0H9LlWpJpB2iBcqGCHKr%2FEqGv0dAzHhWq1tt%2B3g2Ff4pe40EDUxPdRHEgIriicpDUJfqr%2F4VHCbnknKaTqOHxD4daQ94zPSv%2FhbwDdzv%2BBETp89mhcFzlMdBhk%2FnUJyps9e7m70Sclgap6OWWexB%2Bx7OI5BaswVKnt%2FnkdAL5%2BVdD84BlnpG0sd%2F3AB8LGTRQFgHfb6s04hTIomTfReDc04grnijXayyl5l2mtpZYfrdCiToP55E%2F7%2F%2Fp8%2Bds2AnKD8iryO7hHuSoOzfAlpqRkBcBigbzXMd1WHk5bbUkjUaj5fHwW5uRtirjAY4P1u7HAXNPrELTolz8NCIacCicX2GPOOgSF3J%2Bwl5vuszNQS5VnuZZRL8cP3U5OL3mcWdeaulrCqGJcwOF2MNDzmk1sSDsSDCXvAZcmvFGY1weG%2FfvRoDohI0X0rEizaS87kL75ze499hwtFwTgyUTMMMnL6rWiCwwc9FBogMJb34dQGOpgBjAWsfeC%2F5GDVizMb7d%2BMzMRmweyD%2Bji%2BTTVZwNGMN3yaSA90smDJuWwfxs7rgP2KhMGfl5KtJtvj2akw%2FRmTzX4tUOZBePYsNTc3%2F9vQt%2Fft5vVTOop6lgGnNusyqOl4GGC6qdtcp7lVfIQvJE048%2FbpFgorbuyn%2BWPmdXRdmsZag0O2kS8o43nbTWNAraPntPAN3dqZnyw%3D&X-Amz-SignedHeaders=host&x-id=GetObject&X-Amz-Signature=91dfc30689af684b5e224ec16d44086331d5cfa98b89c3a16af0bbec26a04031" alt="Motif doré décoratif" width="64" height="40" loading="lazy"></div>
+
+<article class="day" id="jour-1">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 1</span>
+      <span class="day-date">Lundi 19 avril 2027</span>
+      <h3 class="day-title">Arrivée à Pise et camp de base à La Spezia</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Vol TLS–PSA</span><span class="chip">Train Pise → La Spezia</span><span class="chip">Installation</span></div>
+        <p>Atterrissage à Pise en milieu de journée, puis train régional direct jusqu'à La Spezia Centrale (environ 1h). Installation dans votre logement, puis première déambulation dans le Centro Storico — Piazza Garibaldi, Via del Prione et ses vitrines, jusqu'au front de mer.</p>
+        <p>Le soir venu, premier dîner ligure : trofie al pesto, focaccia et un verre de vermentino en terrasse pour poser le rythme du séjour.</p>
+        <div class="saveurs"><strong>À goûter :</strong> trofie al pesto, focaccia genovese, vermentino des Colli di Luni.</div>
+        <div class="callout callout-local">
+          <div class="callout-title">Conseil local</div>
+          <p>Logament à réserver près de la gare de La Spezia : cela facilite chaque excursion et évite l'inflation tarifaire des villages des Cinque Terre.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/c09cc54e07e33cea368262f6c30c163213046f8d.jpg" alt="Ruelle colorée du centre historique de La Spezia" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-2">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 2</span>
+      <span class="day-date">Mardi 20 avril 2027</span>
+      <h3 class="day-title">Lerici &amp; Tellaro, joyaux du golfe des Poètes</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Bus local</span><span class="chip">Château de Lerici</span><span class="chip">Sentier côtier</span></div>
+        <p>Direction le golfe des Poètes en bus local (aucun pass nécessaire, quelques euros le trajet). À Lerici, on grimpe jusqu'au château médiéval qui domine la baie, avant de flâner le long du port aux façades pastel.</p>
+        <p>L'après-midi, sentier côtier jusqu'à Tellaro, minuscule village de pêcheurs suspendu sur les rochers, où la légende raconte qu'une pieuvre géante aurait un jour sauvé le village en sonnant la cloche de l'église pour alerter d'une attaque de pirates.</p>
+        <div class="saveurs"><strong>À goûter :</strong> anchois marinés de Lerici, fritto misto en bord de mer.</div>
+        <div class="callout callout-local">
+          <div class="callout-title">Conseil local</div>
+          <p>Byron Shelley admirait cette côte — d'où le nom de « golfe des Poètes ». Marcher jusqu'à la petite crique sous le château pour la vue la plus romantique.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/a47e2bac5513b3ddcb7aa4ca06bcee1609eb36c0.jpg" alt="Château de Lerici surplombant le port coloré" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-3">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 3</span>
+      <span class="day-date">Mercredi 21 avril 2027</span>
+      <h3 class="day-title">Riomaggiore, Manarola &amp; la Via dell'Amore</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Cinque Terre Treno Card (jour 1/3)</span><span class="chip">Via dell'Amore réservée</span><span class="chip">Déjeuner panoramique</span></div>
+        <p>Début de la carte Treno 3 jours. Train jusqu'à Riomaggiore : exploration du port coloré et du point de vue de Via Discovolo. Puis la fameuse Via dell'Amore, 1 km de sentier suspendu entre falaises et mer, jusqu'à Manarola — créneau horaire à réserver en ligne à l'avance.</p>
+        <p>Déjeuner à Manarola face aux terrasses de vigne qui plongent vers l'eau — l'un des panoramas les plus photographiés d'Italie.</p>
+        <div class="saveurs"><strong>À goûter :</strong> spaghetti alle vongole, sciacchetrà en digestif, gelato artisanal.</div>
+        <div class="callout callout-reserve">
+          <div class="callout-title">À réserver</div>
+          <p>Via dell'Amore : créneaux de 30 minutes, 200 personnes maximum par créneau — réservation en ligne obligatoire sur cinqueterre.eu.com, plusieurs semaines à l'avance pour avril.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/e404d193fb526fecaae4c167735d795d0e034cf0.jpg" alt="Sentier de la Via dell'Amore surplombant la mer" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-4">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 4</span>
+      <span class="day-date">Jeudi 22 avril 2027</span>
+      <h3 class="day-title">Corniglia, la suspendue &amp; Vernazza, la fortifiée</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Cinque Terre Treno Card (jour 2/3)</span><span class="chip">Dégustation Sciacchetrà</span><span class="chip">Château Doria</span></div>
+        <p>Seul village des Cinque Terre perché sans accès direct à la mer, Corniglia se mérite : 382 marches en brique (ou la navette, 1,50 €) mènent à un dédale de ruelles entouré de vignobles en terrasses. Dégustation de Sciacchetrà, le vin doux local né sur ces pentes escarpées.</p>
+        <p>Puis cap sur Vernazza par le train : château Doria, petit port aux barques colorées, église Santa Margherita d'Antiochia au bord de l'eau — le village le plus photogénique des cinq.</p>
+        <div class="saveurs"><strong>À goûter :</strong> Sciacchetrà DOC, anchois de Vernazza, farinata.</div>
+        <div class="callout callout-signature">
+          <div class="callout-title">Expérience signature</div>
+          <p>Dégustation de Sciacchetrà dans une cave familiale de Corniglia, au cœur des vignobles en terrasses classés UNESCO — un terroir unique produit à la main sur des pentes à 40% de déclivité.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/d297f2795fe3069cacfdd3331e34e23a3ff39061.jpg" alt="Vignobles en terrasses au-dessus de Corniglia" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-5">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 5</span>
+      <span class="day-date">Vendredi 23 avril 2027</span>
+      <h3 class="day-title">Randonnée vers Monterosso, via Vernazza</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Cinque Terre Treno Card (jour 3/3)</span><span class="chip">Sentier 592-4</span><span class="chip">Plage de Monterosso</span></div>
+        <p>Dernier jour de la carte Treno. Départ tôt de Vernazza pour le sentier côtier vers Monterosso al Mare (environ 1h30, ouvert le matin en haute saison) : vues vertigineuses sur la Méditerranée et passages en balcon au-dessus des vignes.</p>
+        <p>Arrivée à Monterosso, la plus vaste et la plus balnéaire des Cinque Terre : farniente sur la plage principale, puis focaccia al formaggio en dégustation de rue avant le retour.</p>
+        <div class="saveurs"><strong>À goûter :</strong> focaccia al formaggio (style Recco), anchois frits de Monterosso.</div>
+        <div class="callout callout-local">
+          <div class="callout-title">Conseil local</div>
+          <p>Partir avant 8h pour éviter la chaleur et la foule sur le sentier ; vérifier l'état du sentier sur "parconazionale5terre.it" la veille.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/f5542232800e92b8479dfe22df7f114556fe75c5.jpg" alt="Plage de Monterosso al Mare vue du ciel" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+
+<article class="day" id="jour-6">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 6</span>
+      <span class="day-date">Samedi 24 avril 2027</span>
+      <h3 class="day-title">Randonnée des sentiers des sanctuaires</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Sentiers gratuits</span><span class="chip">Pique-nique en altitude</span><span class="chip">8h de marche</span></div>
+        <p>Journée en altitude, loin de la foule : les sentiers reliant les sanctuaires surplombant les Cinque Terre (Nostra Signora di Soviore, Reggio, Montenero) offrent des panoramas à 360° sur mer et montagnes, sans nécessiter de pass — ces chemins ne sont pas couverts par la Trekking Card.</p>
+        <p>Départ de Monterosso, retour vers Vernazza en fin d'après-midi. Emporter un pique-nique de focaccia et fromage pour un déjeuner au sommet.</p>
+        <div class="saveurs"><strong>À goûter :</strong> focaccia farcie, fruits secs, vin local en gourde.</div>
+        <div class="callout callout-local">
+          <div class="callout-title">Conseil local</div>
+          <p>Bonnes chaussures de randonnée indispensables — il faut compter 6 à 8 heures avec pauses. Emporter 1,5 L d'eau par personne, les fontaines sont rares en altitude.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/a85ae9598c2e930fd3adf23ee99ee9ae70add72b.jpg" alt="Sentier de randonnée en altitude au-dessus des Cinque Terre" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-7">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 7</span>
+      <span class="day-date">Dimanche 25 avril 2027</span>
+      <h3 class="day-title">Cyclisme de Levanto à Framura, via Bonassola</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Location de vélo</span><span class="chip">Anciens tunnels ferroviaires</span><span class="chip">Piste plate en bord de mer</span></div>
+        <p>Depuis Levanto, location de vélos (électriques ou classiques) pour parcourir la piste cyclable aménagée dans d'anciens tunnels ferroviaires, une succession d'arches de pierre ouvertes sur la mer, jusqu'à Bonassola puis Framura.</p>
+        <p>Le parcours, entièrement plat et sécurisé, alterne passages souterrains rafraîchissants et échappées lumineuses sur la Méditerranée — une façon spectaculaire et reposante de découvrir la côte hors des sentiers escarpés.</p>
+        <div class="saveurs"><strong>À goûter :</strong> panino au stockfish, granita au citron à Bonassola.</div>
+        <div class="callout callout-signature">
+          <div class="callout-title">Expérience signature</div>
+          <p>Rouler à travers les tunnels illuminés de la ligne ferroviaire désaffectée Levanto–Framura : un des parcours cyclables les plus photogéniques de Ligurie, accessible à tous niveaux.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/df9e16eca060b7092dc3ed0dbed58bd6a3dbe87a.jpg" alt="Cyclistes dans le tunnel de la piste Levanto-Framura" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-8">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 8</span>
+      <span class="day-date">Lundi 26 avril 2027</span>
+      <h3 class="day-title">Cinque Terre en bateau, au départ de La Spezia</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Excursion 8h</span><span class="chip">Vue depuis la mer</span><span class="chip">Baignade en crique</span></div>
+        <p>Une journée entière en mer pour admirer les cinq villages sous leur plus bel angle : celui du large. L'excursion en bateau longe la côte de Riomaggiore à Monterosso, avec arrêts baignade dans des criques inaccessibles à pied et un apéritif servi à bord.</p>
+        <p>Compter 95 à 150 € par personne pour une sortie de 3 à 4 heures ; les formules journée complète (8h) incluent souvent Portovenere et les îles.</p>
+        <div class="saveurs"><strong>À goûter :</strong> aperitivo à bord, focaccia et vin blanc frais.</div>
+        <div class="callout callout-signature">
+          <div class="callout-title">Expérience signature — investissement justifié</div>
+          <p>C'est LA expérience à ne pas manquer du séjour : depuis l'eau, les villages perchés révèlent une perspective que la terre ferme ne montrera jamais. Les criques accessibles uniquement en bateau valent largement le tarif premium.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6f88622b07a78b346a3d29e02439c7a9cdb2fc96.jpg" alt="Bateau de croisière longeant la côte des Cinque Terre" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-9">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 9</span>
+      <span class="day-date">Mardi 27 avril 2027</span>
+      <h3 class="day-title">Levanto &amp; randonnée vers Punta Mesco</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Train inclus</span><span class="chip">Randonnée 2h30 A/R</span><span class="chip">Vue sur la Corse</span></div>
+        <p>Matinée plage à Levanto, longue étendue de sable moins fréquentée que les Cinque Terre. L'après-midi, randonnée gratuite jusqu'à Punta Mesco (environ 2h30 aller-retour) : le point de vue le plus spectaculaire de la côte, embrassant les cinq villages, la Corse et parfois même les Alpes par temps clair.</p>
+        <p>Retour à Levanto pour un déjeuner tardif dans la vieille ville, moins touristique et plus abordable que les villages voisins.</p>
+        <div class="saveurs"><strong>À goûter :</strong> farinata levantaise, poisson grillé du jour.</div>
+        <div class="callout callout-local">
+          <div class="callout-title">Conseil local</div>
+          <p>Levanto est nettement moins cher pour le déjeuner que les Cinque Terre — idéal pour un repas de qualité à prix plus doux.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/6a78ca431bdd3917e43012b6480e30b7b5a07821.jpg" alt="Vue panoramique depuis le sentier de Punta Mesco" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-10">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 10</span>
+      <span class="day-date">Mercredi 28 avril 2027</span>
+      <h3 class="day-title">Portovenere &amp; les Trois Îles</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Bus ou ferry</span><span class="chip">Excursion îles Palmaria, Tino, Tinetto</span><span class="chip">Déjeuner fruits de mer</span></div>
+        <p>Surnommée la « sixième terre », Portovenere mérite le détour : église San Pietro posée sur son promontroire, ruelles pastel, château Doria dominant le golfe. Depuis le port, excursion en bateau vers les trois îles de la réserve marine — Palmaria, Tino et Tinetto — environ 1h30, une eau d'une clarté remarquable.</p>
+        <p>Déjeuner de fruits de mer face au port, avant le retour à La Spezia par bus ou par mer.</p>
+        <div class="saveurs"><strong>À goûter :</strong> pâtes aux fruits de mer, muscat des Cinque Terre.</div>
+        <div class="callout callout-reserve">
+          <div class="callout-title">À réserver</div>
+          <p>Excursion aux Trois Îles : réserver la veille en haute saison, environ 34 € par personne pour 1h30 — départs fréquents mais places limitées le week-end de Pâques.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/dec0c7627885aea1add52cc3f28039ac695001c5.jpg" alt="Façades colorées du port de Portovenere" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-11">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 11</span>
+      <span class="day-date">Jeudi 29 avril 2027</span>
+      <h3 class="day-title">Jour libre — La Spezia et ses environs</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Souvenirs</span><span class="chip">Plage ou village favori</span><span class="chip">Dîner de gala</span></div>
+        <p>Journée à votre rythme : revisiter le village qui nous a le plus marqué, flâner sur le marché couvert de La Spezia, ou offrez-vous une après-midi farniente sur l'une des plages du golfe (San Terenzo, Le Grazie).</p>
+        <p>En soirée, dîner d'exception dans le Centro Storico de La Spezia pour célébrer le séjour — une belle occasion pour un menu dégustation avec accords mets-vins ligures.</p>
+        <div class="saveurs"><strong>À goûter :</strong> menu dégustation, mesciua (soupe traditionnelle spezzina), muscat passito en dessert.</div>
+        <div class="callout callout-signature">
+          <div class="callout-title">Expérience signature — investissement justifié</div>
+          <p>Un dîner gastronomique avec vue sur le golfe des Poètes clôt magnifiquement le séjour — compter 80 à 120 € pour deux dans une table réputée, un budget largement justifié pour l'occasion des 30 ans.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/78682378df9c86d39d8c95c11e8ef0aa7e63dcda.jpg" alt="Rue animée de La Spezia le soir" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+<article class="day" id="jour-12">
+  <div class="container">
+    <div class="day-header">
+      <span class="day-number">Jour 12</span>
+      <span class="day-date">Vendredi 30 avril 2027</span>
+      <h3 class="day-title">Lucques à vélo, puis retour à l'aéroport de Pise</h3>
+    </div>
+    <div class="day-body">
+      <div class="day-text">
+        <div class="day-meta"><span class="chip">Train La Spezia → Lucca</span><span class="chip">Vélo en remparts</span><span class="chip">Vol retour</span></div>
+        <p>Dernière étape avant le départ : train vers Lucques, ville fortifiée à la Renaissance intacte. Location de vélos (10 € par personne) pour faire le tour des remparts plantés d'arbres — un rituel local incontournable.</p>
+        <p>Visite de la Piazza dell'Anfiteatro, ovale né sur les vestiges d'un amphithéâtre romain, puis ascension de la Torre Guinigi couronnée de chênes verts. Déjeuner de tordelli lucchesi avant de reprendre le train vers l'aéroport de Pise pour le vol retour.</p>
+        <div class="saveurs"><strong>À goûter :</strong> tordelli lucchesi, buccellato (brioche sucrée traditionnelle).</div>
+        <div class="callout callout-local">
+          <div class="callout-title">Conseil local</div>
+          <p>Prévoir une marge de 2h30 avant le vol pour le trajet Lucca–Pise Aéroport (environ 30 minutes de train) et l'enregistrement.</p>
+        </div>
+      </div>
+      <div class="day-photo"><img src="https://pplx-res.cloudinary.com/image/upload/pplx_search_images/22f8b891b7a69b9a65a244af9a8a35c489bc9406.jpg" alt="Cyclistes sur les remparts de Lucques" width="800" height="600" loading="lazy"></div>
+    </div>
+  </div>
+</article>
+
+
+<section class="invest-section">
+  <div class="container">
+    <h2>Où l'investissement supérieur se justifie</h2>
+    <p class="lede">Sur ce parcours haut de gamme, cinq postes méritent un budget plus généreux — le reste peut rester raisonnable sans rien perdre de la magie du séjour.</p>
+    <table class="invest">
+      <thead>
+        <tr><th>Expérience</th><th>Budget indicatif (2 pers.)</th><th>Pourquoi investir</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Excursion en bateau Cinque Terre (jour 8)</td><td>190 – 300 €</td><td>Perspective unique depuis la mer, baignade en criques inaccessibles à pied</td></tr>
+        <tr><td>Logement près de la gare de La Spezia</td><td>+10 à 20 €/nuit</td><td>Gain de temps quotidien et confort sur 11 nuits</td></tr>
+        <tr><td>Via dell'Amore + créneau réservé</td><td>Inclus dans la carte</td><td>Passage iconique, une fois dans une vie — réservation impérative</td></tr>
+        <tr><td>Dégustation de Sciacchetrà à Corniglia</td><td>30 – 50 €</td><td>Terroir unique produit à la main sur des terrasses classées UNESCO</td></tr>
+        <tr><td>Dîner de célébration à La Spezia (jour 11)</td><td>80 – 120 €</td><td>Moment fort pour marquer l'anniversaire, table avec vue sur le golfe</td></tr>
+        <tr><td>Excursion Trois Îles à Portovenere</td><td>~68 € (34 €/pers.)</td><td>Réserve marine classée, eaux cristallines, accès impossible autrement</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <h2>Pratique &amp; bagages</h2>
+    <div class="footer-grid">
+      <div class="info-card">
+        <h3>Cartes &amp; billets</h3>
+        <ul>
+          <li>2 cartes Treno MS de 3 jours + billets simples les autres jours</li>
+          <li>Réservation Via dell'Amore en ligne, plusieurs semaines à l'avance</li>
+          <li>Application Trenitalia pour les horaires en temps réel</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>À emporter</h3>
+        <ul>
+          <li>Chaussures de randonnée + une paire de ville</li>
+          <li>Sac à dos léger, crème solaire, chapeau</li>
+          <li>Espèces pour petits commerces et pourboires</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>Bon à savoir</h3>
+        <ul>
+          <li>Fin avril = affluence pascale, réserver restaurants et bateaux en avance</li>
+          <li>Consulter parconazionale5terre.it pour l'état des sentiers</li>
+          <li>Numéro d'urgence européen : 112</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
